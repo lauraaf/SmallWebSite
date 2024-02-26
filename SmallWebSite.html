@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>SmallWebSite</title>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("button").click(function() {
+                $.get("https://api.github.com/users/"+usr.value+"/repos", function(data, status){
+                    txt ="";
+                    $("#InfoRepos tbody").empty();
+                    $.each(data, function(index, item){
+                        $("#InfoRepos tbody").append(
+                            txt = '<tr><td>'+ item.name +
+                                '</td><td>' + item.id +
+                                '</td><td>' + item.description +
+                                '</td><td>' + item.stargazers_count +
+                                '</td><td>'+ item.language +
+                                '</td></tr>'
+                        );
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body class="bg-dark">
+<div class="jumbotron bg-dark text-center text-white">
+    <h1 class="underline">Small Web Site</h1>
+</div>
+
+<div class="container pt-3 my-3 bg-secondary text-center text-white">
+    <h1></h1>
+    <div class="row">
+        <div class="col-sm-4 text-center">
+            <p>Write the name you want to search:</p>
+            <input type="text" id="usr" placeholder="GitHub's username">
+            <button type="button" class="btn btn-info">Search</button>
+        </div>
+        <div class="col-sm-8">
+            <h1>Information about the Repositories</h1>
+            <table class="table table-dark table-striped table borderless" id="InfoRepos">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Followers</th>
+                    <th>Language</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
